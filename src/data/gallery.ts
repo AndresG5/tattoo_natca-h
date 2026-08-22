@@ -1,4 +1,5 @@
 import type { StyleKey } from './styles'
+import { EXAMPLE_IMAGES } from './exampleImages'
 
 export interface GalleryItem {
   id: string
@@ -13,6 +14,12 @@ export interface GalleryItem {
   artist: string
   description?: string
   placeholder?: boolean
+  /**
+   * Foto de EJEMPLO temporal (stock, licencia libre) — no es trabajo real
+   * del estudio. Solo para que la galería no se vea vacía. Quítala en
+   * cuanto subas la foto real correspondiente en `image`.
+   */
+  exampleImage?: string
 }
 
 // TODO(dueño del sitio): reemplaza estas entradas por fotografías reales.
@@ -34,6 +41,7 @@ export const gallery: GalleryItem[] = [
     style: 'fine-line',
     artist: 'Nat Cash',
     placeholder: true,
+    exampleImage: EXAMPLE_IMAGES.galleryPiece,
   },
   {
     id: 'tattoo-03',

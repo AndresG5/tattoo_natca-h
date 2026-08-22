@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import InfoBar from './components/InfoBar'
 import About from './components/About'
 import Gallery from './components/Gallery'
 import Artists from './components/Artists'
@@ -18,7 +17,6 @@ export default function App() {
     <div className="relative min-h-dvh overflow-x-hidden bg-ink">
       <Navbar />
       <Hero />
-      <InfoBar />
       <About />
       <Gallery />
       <Artists />

@@ -1,11 +1,6 @@
 import { motion } from 'framer-motion'
 import ImagePlaceholder from './ImagePlaceholder'
-
-const STATS = [
-  { value: '—', label: 'Clientes atendidos' },
-  { value: '—', label: 'Diseños realizados' },
-  { value: '—', label: 'Años de experiencia' },
-]
+import { EXAMPLE_IMAGES } from '../data/exampleImages'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -34,7 +29,8 @@ export default function About() {
             compact
           />
           <ImagePlaceholder
-            label="Detalle del estudio — /public/images/studio/"
+            label="Detalle del estudio (máquina de tatuar) — /public/images/studio/"
+            exampleSrc={EXAMPLE_IMAGES.studioDetail}
             className="aspect-square rounded-2xl border border-gold/20"
             compact
           />
@@ -49,20 +45,6 @@ export default function About() {
             En Cash Tattoo creemos que un tatuaje no solamente se lleva en la piel. Representa
             una historia, una etapa, una persona o una idea. Trabajamos cada diseño de forma
             personalizada, cuidando el detalle desde la primera plática hasta el resultado final.
-          </p>
-
-          <div className="mt-8 grid grid-cols-3 gap-4">
-            {STATS.map((s) => (
-              <div key={s.label} className="rounded-2xl border border-gold/15 bg-charcoal/60 px-3 py-4 text-center">
-                <div className="font-display text-xl text-gold-light sm:text-2xl">{s.value}</div>
-                <div className="mt-1 font-body text-[11px] leading-tight text-bone/50 sm:text-xs">
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-3 font-body text-[11px] text-bone/35">
-            Estadísticas pendientes de confirmar con el estudio.
           </p>
         </div>
       </div>

@@ -43,7 +43,11 @@ export default function GalleryModal({
               <X size={16} />
             </button>
 
-            <ImagePlaceholder label={item.title} className="aspect-square w-full" />
+            <ImagePlaceholder
+              label={item.title}
+              exampleSrc={item.exampleImage}
+              className="aspect-square w-full"
+            />
 
             <div className="p-6 text-left">
               <span className="font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-cash-pink">

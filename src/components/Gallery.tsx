@@ -79,7 +79,11 @@ export default function Gallery() {
                 i % 5 === 0 ? 'aspect-[3/4]' : 'aspect-square'
               }`}
             >
-              <ImagePlaceholder label={item.title} className="h-full w-full transition duration-500 group-hover:scale-105" />
+              <ImagePlaceholder
+                label={item.title}
+                exampleSrc={item.exampleImage}
+                className="h-full w-full transition duration-500 group-hover:scale-105"
+              />
               <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/90 via-ink/10 to-transparent p-3 opacity-0 transition group-hover:opacity-100">
                 <span className="font-body text-[10px] font-semibold uppercase tracking-wider text-cash-pink">
                   {styleName}

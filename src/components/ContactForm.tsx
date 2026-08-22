@@ -1,13 +1,12 @@
 import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Paperclip } from 'lucide-react'
+import { Send, ImagePlus } from 'lucide-react'
 import { SITE } from '../data/site'
 import { styles } from '../data/styles'
 
 interface FormState {
   name: string
   whatsapp: string
-  email: string
   type: string
   style: string
   size: string
@@ -19,7 +18,6 @@ interface FormState {
 const initialState: FormState = {
   name: '',
   whatsapp: '',
-  email: '',
   type: '',
   style: '',
   size: '',
@@ -40,19 +38,9 @@ function fieldClass() {
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
-  const [attachmentNote, setAttachmentNote] = useState('')
 
   const update = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [key]: e.target.value }))
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    setAttachmentNote(
-      file
-        ? `Adjuntará "${file.name}" directamente en WhatsApp.`
-        : '',
-    )
-  }
 
   const validate = () => {
     const next: Partial<Record<keyof FormState, string>> = {}
@@ -76,7 +64,6 @@ export default function ContactForm() {
       form.budget && `Presupuesto aproximado: ${form.budget}`,
       `Idea: ${form.description}`,
       form.whatsapp && `Mi WhatsApp: ${form.whatsapp}`,
-      form.email && `Mi correo: ${form.email}`,
     ].filter(Boolean)
 
     const message = encodeURIComponent(lines.join('\n'))
@@ -117,13 +104,6 @@ export default function ContactForm() {
           </label>
           <input id="whatsapp" value={form.whatsapp} onChange={update('whatsapp')} className={fieldClass()} placeholder="10 dígitos" />
           {errors.whatsapp && <p className="mt-1 font-body text-xs text-cash-pink">{errors.whatsapp}</p>}
-        </div>
-
-        <div className="sm:col-span-2">
-          <label htmlFor="email" className="mb-1.5 block font-body text-xs font-medium text-bone/60">
-            Correo (opcional)
-          </label>
-          <input id="email" type="email" value={form.email} onChange={update('email')} className={fieldClass()} placeholder="tucorreo@ejemplo.com" />
         </div>
 
         <div className="sm:col-span-1">
@@ -176,27 +156,21 @@ export default function ContactForm() {
           {errors.description && <p className="mt-1 font-body text-xs text-cash-pink">{errors.description}</p>}
         </div>
 
-        <div className="sm:col-span-1">
+        <div className="sm:col-span-2">
           <label htmlFor="budget" className="mb-1.5 block font-body text-xs font-medium text-bone/60">
             Presupuesto aproximado
           </label>
           <input id="budget" value={form.budget} onChange={update('budget')} className={fieldClass()} placeholder="Opcional" />
         </div>
 
-        <div className="sm:col-span-1">
-          <label htmlFor="reference" className="mb-1.5 block font-body text-xs font-medium text-bone/60">
-            Adjuntar referencia
-          </label>
-          <label
-            htmlFor="reference"
-            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-gold/25 bg-ink/40 px-4 py-3 font-body text-xs text-bone/50 transition hover:border-gold/50"
-          >
-            <Paperclip size={14} />
-            {attachmentNote || 'Elegir imagen'}
-          </label>
-          <input id="reference" type="file" accept="image/*" onChange={handleFile} className="hidden" />
-          <p className="mt-1 font-body text-[11px] text-bone/35">
-            El archivo no se sube aquí — te recordamos adjuntarlo directamente en WhatsApp.
+        {/* Nota: no hay adjuntar-archivo real aquí porque un link de WhatsApp
+            (wa.me) no puede llevar una imagen pegada — WhatsApp no lo permite.
+            En vez de un botón que no hace nada, explicamos el paso siguiente. */}
+        <div className="flex items-start gap-3 rounded-xl border border-gold/15 bg-charcoal/50 px-4 py-3 sm:col-span-2">
+          <ImagePlus size={16} className="mt-0.5 shrink-0 text-cash-pink" />
+          <p className="font-body text-xs leading-relaxed text-bone/55">
+            Al enviar, se abrirá WhatsApp con tu mensaje ya escrito — desde ahí puedes adjuntar
+            tus fotos de referencia directamente en el chat.
           </p>
         </div>
 

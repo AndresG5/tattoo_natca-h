@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { MessageCircle, ImageIcon, Sparkles } from 'lucide-react'
 import { waLink } from '../data/site'
+import { EXAMPLE_IMAGES } from '../data/exampleImages'
 import ImagePlaceholder from './ImagePlaceholder'
 
 function DollarField() {
@@ -32,6 +33,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <ImagePlaceholder
           label="Fotografía grande del hero (estudio, sesión o pieza destacada) — colócala en /public/images/hero/"
+          exampleSrc={EXAMPLE_IMAGES.hero}
           className="h-full w-full"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/70 to-ink" />
